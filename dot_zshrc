@@ -43,3 +43,18 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Enable autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+
+# Aliases - Git
+alias g='git'
+alias ga='git add'
+alias gb='git branch'
+alias gbd='git branch -D'
+alias gcb='git checkout -b'
+alias gs='git status'
+alias gst='git stash'
+alias gsw='git switch'
+alias gswm='git switch main'
+
+# git checkout branchをfzfで選択
+alias fgc='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")'
+
