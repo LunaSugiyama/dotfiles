@@ -1,8 +1,18 @@
 # Set up the prompt
-fpath+=("$(brew --prefix)/share/zsh/site-functions")
+if command -v brew >/dev/null 2>&1; then
+  fpath+=("$(brew --prefix)/share/zsh/site-functions")
+fi
+
+if [ -d "$HOME/.zsh/pure" ]; then
+  fpath+=("$HOME/.zsh/pure")
+fi
+
 autoload -Uz promptinit
 promptinit
-prompt pure
+
+if whence -w prompt_pure_setup >/dev/null 2>&1; then
+  prompt pure
+fi
 
 setopt histignorealldups sharehistory
 
