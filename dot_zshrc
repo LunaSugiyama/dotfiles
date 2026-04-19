@@ -58,8 +58,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 alias g='git'
 alias ga='git add'
 alias gb='git branch'
+alias gc='git commit -m'
 alias gbd='git branch -D'
 alias gcb='git checkout -b'
+alias gp='git push'
 alias gs='git status'
 alias gst='git stash'
 alias gsw='git switch'
@@ -68,3 +70,11 @@ alias gswm='git switch main'
 # git checkout branchをfzfで選択
 alias fgc='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")'
 
+
+# conda (only if installed)
+if [ -d "$HOME/miniforge3" ]; then
+  eval "$($HOME/miniforge3/bin/conda shell.zsh hook)"
+  if [ -n "$CONDA_PREFIX" ] && [ -d "$CONDA_PREFIX/lib" ]; then
+    export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:${LD_LIBRARY_PATH:-}"
+  fi
+fi
